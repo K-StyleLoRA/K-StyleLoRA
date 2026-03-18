@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="K-StyleLoRA: Information-Guided Image Generation via Selective Feature Learning">
+  <meta name="keywords" content="K-StyleLoRA, LoRA, Image Generation, Multimodal">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>K-StyleLoRA: Information-Guided Image Generation via Selective Feature Learning</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://github.com/K-StyleLoRA">
+        <span class="icon">
+            <i class="fab fa-github"></i>
+        </span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <div style="display: flex; justify-content: center; align-items: center; gap: 30px; margin-bottom: 20px;">
+            <img src="./static/images/CAU_emblem.png" alt="Chung-Ang University" style="height: 150px; width: auto;">
+            <img src="./static/images/snu_ui.png" alt="Seoul National University" style="height: 150px; width: auto;">
+          </div>
+          <h1 class="title is-1 publication-title">K-StyleLoRA: Information-Guided Image Generation via Selective Feature Learning</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="./index.html">Soyoung Lee</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="./index.html">Hyoungseo Cho</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="./index.html">Myungjoo Kang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="./index.html">Youngjoon Yoo</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Chung-Ang University,</span>
+            <span class="author-block"><sup>2</sup>Seoul National University</span>
+            
+          </div>
+          <div class="is-size-5 publication-authors">
+            🏆 <strong>ICCV 2025 WCCA <span style="color: #ff3860;">Oral</span> Presentation</strong>🏆
+          </div>
+<!--           
+          <div class="is-size-5 publication-awards" style="margin-top: 1rem; text-align: center;">
+            🏆 <strong>ICCVW <span style="color: #ff3860;">Oral</span> Presentation</strong>
+          </div> -->
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://openaccess.thecvf.com/content/ICCV2025W/WCCA/papers/Lee_K-StyleLoRA_Information-Guided_Image_Generation_via_Selective_Feature_Learning_ICCVW_2025_paper.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/K-StyleLoRA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/K-Style/07.png" alt="K-StyleLoRA Teaser" style="width: 100%; height: auto; border-radius: 10px;">
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">K-StyleLoRA</span> enables information-guided image generation via selective feature learning.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="./static/images/K-Style/02.png" alt="K-StyleLoRA Result 1" style="width: 100%; height: auto;">
+        </div>
+        <div class="item">
+          <img src="./static/images/K-Style/03.png" alt="K-StyleLoRA Result 2" style="width: 100%; height: auto;">
+        </div>
+        <div class="item">
+          <img src="./static/images/K-Style/04.png" alt="K-StyleLoRA Result 3" style="width: 100%; height: auto;">
+        </div>
+        <div class="item">
+          <img src="./static/images/K-Style/01.png" alt="K-StyleLoRA Result 3" style="width: 100%; height: auto;">
+        </div>
+        <div class="item">
+          <img src="./static/images/K-Style/05.png" alt="K-StyleLoRA Result 4" style="width: 100%; height: auto;">
+        </div>
+        <div class="item">
+          <img src="./static/images/K-Style/06.png" alt="K-StyleLoRA Result 5" style="width: 100%; height: auto;">
+        </div>
+        <div class="item">
+          <img src="./static/images/K-Style/07.png" alt="K-StyleLoRA Result 6" style="width: 100%; height: auto;">
+        </div>
+        <div class="item">
+          <img src="./static/images/K-Style/08.png" alt="K-StyleLoRA Result 7" style="width: 100%; height: auto;">
+        </div>
+        <div class="item">
+          <img src="./static/images/K-Style/09.png" alt="K-StyleLoRA Result 8" style="width: 100%; height: auto;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Despite remarkable advances in image generation, existing
+            diffusion models struggle to capture diverse cultural aesthetics.
+            While Low-Rank Adaptation (LoRA) enables efficient
+            fine-tuning, conventional approaches lack semantic
+            awareness. They apply uniform adaptations across all features,
+            leading to suboptimal cultural representation.
+          </p>
+          <p>
+            To
+            address these limitations, we introduce <span class="dnerf">K-StyleLoRA</span>, a
+            novel framework that leverages CLIP's cross-modal capabilities
+            for cultural image generation. Our approach introduces
+            two key contributions. First, CLIP-Guided Information
+            Gating dynamically modulates LoRA adaptations
+            based on cultural relevance scores, selectively enhancing
+            relevant features while suppressing irrelevant ones. Second,
+            Cultural Semantic Loss provides additional semantic
+            guidance by optimizing CLIP-based similarity to cultural
+            concepts.
+          </p>
+          <p>
+            Extensive experiments on Korean traditional
+            culture show superior cultural fidelity while maintaining
+            generation quality and diversity. Our framework establishes
+            semantic-aware adaptation as a powerful paradigm
+            for cultural representation. This scalable approach can be
+            extended to diverse cultural contexts and generation tasks
+            beyond Korean aesthetics.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Method. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content has-text-centered">
+          <h2 class="title is-3">Method</h2>
+          <p>
+            K-StyleLoRA leverages CLIP-Guided Information Gating to dynamically modulate LoRA adaptations based on cultural relevance.
+          </p>
+        </div>
+        <figure class="image">
+          <img src="./static/images/K-Style/10.png" alt="K-StyleLoRA Method Overview" style="width: 100%; height: auto; border-radius: 10px;">
+        </figure>
+      </div>
+    </div>
+    <!--/ Method. -->
+
+    <!-- Quantitative Results. -->
+    <div class="columns is-centered" style="margin-top: 3rem;">
+      <div class="column is-full-width">
+        <div class="content has-text-centered">
+          <h2 class="title is-3">Quantitative Results</h2>
+          <p>
+            Our method demonstrates superior performance in cultural fidelity while maintaining generation quality and diversity.
+          </p>
+        </div>
+        <figure class="image">
+          <img src="./static/images/K-Style/11.png" alt="K-StyleLoRA Quantitative Results" style="width: 100%; height: auto; border-radius: 10px;">
+        </figure>
+      </div>
+    </div>
+    <!--/ Quantitative Results. -->
+
+    <!-- Comparison. -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="content has-text-centered">
+          <h2 class="title is-3">Comparison: Vanilla SDXL vs K-StyleLoRA</h2>
+          <p class="is-size-5">
+            Side-by-side comparison demonstrating the superior cultural representation of K-StyleLoRA.
+          </p>
+        </div>
+        <div class="comparison-grid">
+          <div class="comparison-pair">
+            <div class="comparison-item-grid">
+              <div class="comparison-label-grid">Vanilla SDXL</div>
+              <img src="./static/images/vanilla/01.png" alt="Vanilla SDXL 1" class="comparison-img-grid">
+            </div>
+            <div class="comparison-divider-vertical"></div>
+            <div class="comparison-item-grid">
+              <div class="comparison-label-grid comparison-label-kstyle">K-StyleLoRA</div>
+              <img src="./static/images/k-stylelora/01.png" alt="K-StyleLoRA 1" class="comparison-img-grid">
+            </div>
+          </div>
+          <div class="comparison-pair">
+            <div class="comparison-item-grid">
+              <div class="comparison-label-grid">Vanilla SDXL</div>
+              <img src="./static/images/vanilla/02.png" alt="Vanilla SDXL 2" class="comparison-img-grid">
+            </div>
+            <div class="comparison-divider-vertical"></div>
+            <div class="comparison-item-grid">
+              <div class="comparison-label-grid comparison-label-kstyle">K-StyleLoRA</div>
+              <img src="./static/images/k-stylelora/02.png" alt="K-StyleLoRA 2" class="comparison-img-grid">
+            </div>
+          </div>
+          <div class="comparison-pair">
+            <div class="comparison-item-grid">
+              <div class="comparison-label-grid">Vanilla SDXL</div>
+              <img src="./static/images/vanilla/03.png" alt="Vanilla SDXL 3" class="comparison-img-grid">
+            </div>
+            <div class="comparison-divider-vertical"></div>
+            <div class="comparison-item-grid">
+              <div class="comparison-label-grid comparison-label-kstyle">K-StyleLoRA</div>
+              <img src="./static/images/k-stylelora/03.png" alt="K-StyleLoRA 3" class="comparison-img-grid">
+            </div>
+          </div>
+          <div class="comparison-pair">
+            <div class="comparison-item-grid">
+              <div class="comparison-label-grid">Vanilla SDXL</div>
+              <img src="./static/images/vanilla/04.png" alt="Vanilla SDXL 4" class="comparison-img-grid">
+            </div>
+            <div class="comparison-divider-vertical"></div>
+            <div class="comparison-item-grid">
+              <div class="comparison-label-grid comparison-label-kstyle">K-StyleLoRA</div>
+              <img src="./static/images/k-stylelora/04.png" alt="K-StyleLoRA 4" class="comparison-img-grid">
+            </div>
+          </div>
+          <div class="comparison-pair">
+            <div class="comparison-item-grid">
+              <div class="comparison-label-grid">Vanilla SDXL</div>
+              <img src="./static/images/vanilla/05.png" alt="Vanilla SDXL 5" class="comparison-img-grid">
+            </div>
+            <div class="comparison-divider-vertical"></div>
+            <div class="comparison-item-grid">
+              <div class="comparison-label-grid comparison-label-kstyle">K-StyleLoRA</div>
+              <img src="./static/images/k-stylelora/05.png" alt="K-StyleLoRA 5" class="comparison-img-grid">
+            </div>
+          </div>
+          <div class="comparison-pair">
+            <div class="comparison-item-grid">
+              <div class="comparison-label-grid">Vanilla SDXL</div>
+              <img src="./static/images/vanilla/06.png" alt="Vanilla SDXL 6" class="comparison-img-grid">
+            </div>
+            <div class="comparison-divider-vertical"></div>
+            <div class="comparison-item-grid">
+              <div class="comparison-label-grid comparison-label-kstyle">K-StyleLoRA</div>
+              <img src="./static/images/k-stylelora/06.png" alt="K-StyleLoRA 6" class="comparison-img-grid">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ Comparison. -->
+
+
+
+    <!-- Related Links. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Links</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            Our work builds on and is inspired by the following excellent works in style transfer and efficient fine-tuning.
+          </p>
+          <p>
+            <a href="https://arxiv.org/abs/2106.09685">LoRA: Low-Rank Adaptation of Large Language Models</a> introduced the efficient fine-tuning paradigm that our work extends to cultural image generation.
+          </p>
+          <p>
+            <a href="https://arxiv.org/abs/2103.00020">CLIP</a> provides the cross-modal semantic guidance at the core of our CLIP-Guided Information Gating mechanism.
+          </p>
+          <p>
+            <a href="https://arxiv.org/abs/2112.10752">Stable Diffusion</a> serves as the base generative model upon which K-StyleLoRA is applied.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Related Links. -->
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{lee2025kstylelora,
+  author={Lee, Soyoung and Cho, Hyoungseo and Kang, Myungjoo and Yoo, YoungJoon},
+  title     = {K-StyleLoRA: Information-Guided Image Generation via Selective Feature Learning},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) Workshops},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://openaccess.thecvf.com/content/ICCV2025W/WCCA/papers/Lee_K-StyleLoRA_Information-Guided_Image_Generation_via_Selective_Feature_Learning_ICCVW_2025_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/K-StyleLoRA" class="external-link">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This website template is borrowed from the <a
+              href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> project page.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

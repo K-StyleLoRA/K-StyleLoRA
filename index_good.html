@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="K-StyleLoRA: Information-Guided Image Generation via Selective Feature Learning">
+  <meta name="keywords" content="K-StyleLoRA, LoRA, Image Generation, Multimodal">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>K-StyleLoRA: Information-Guided Image Generation via Selective Feature Learning</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <div style="display: flex; justify-content: center; align-items: center; gap: 30px; margin-bottom: 20px;">
+            <img src="./static/images/CAU_emblem.png" alt="Chung-Ang University" style="height: 150px; width: auto;">
+            <img src="./static/images/snu_ui.png" alt="Seoul National University" style="height: 150px; width: auto;">
+          </div>
+          <h1 class="title is-1 publication-title">K-StyleLoRA: Information-Guided Image Generation via Selective Feature Learning</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="./index.html">Soyoung Lee</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="./index.html">Hyoungseo Cho</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="./index.html">Myungjoo Kang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="./index.html">Youngjoon Yoo</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Chung-Ang University,</span>
+            <span class="author-block"><sup>2</sup>Seoul National University</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/K-Style/01.png" alt="K-StyleLoRA Teaser" style="width: 100%; height: auto; border-radius: 10px;">
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">K-StyleLoRA</span> enables information-guided image generation via selective feature learning.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="./static/images/K-Style/02.png" alt="K-StyleLoRA Result 1" style="width: 100%; height: auto;">
+        </div>
+        <div class="item">
+          <img src="./static/images/K-Style/03.png" alt="K-StyleLoRA Result 2" style="width: 100%; height: auto;">
+        </div>
+        <div class="item">
+          <img src="./static/images/K-Style/04.png" alt="K-StyleLoRA Result 3" style="width: 100%; height: auto;">
+        </div>
+        <div class="item">
+          <img src="./static/images/K-Style/05.png" alt="K-StyleLoRA Result 4" style="width: 100%; height: auto;">
+        </div>
+        <div class="item">
+          <img src="./static/images/K-Style/06.png" alt="K-StyleLoRA Result 5" style="width: 100%; height: auto;">
+        </div>
+        <div class="item">
+          <img src="./static/images/K-Style/07.png" alt="K-StyleLoRA Result 6" style="width: 100%; height: auto;">
+        </div>
+        <div class="item">
+          <img src="./static/images/K-Style/08.png" alt="K-StyleLoRA Result 7" style="width: 100%; height: auto;">
+        </div>
+        <div class="item">
+          <img src="./static/images/K-Style/09.png" alt="K-StyleLoRA Result 8" style="width: 100%; height: auto;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Despite remarkable advances in image generation, existing
+            diffusion models struggle to capture diverse cultural aesthetics.
+            While Low-Rank Adaptation (LoRA) enables efficient
+            fine-tuning, conventional approaches lack semantic
+            awareness. They apply uniform adaptations across all features,
+            leading to suboptimal cultural representation.
+          </p>
+          <p>
+            To
+            address these limitations, we introduce <span class="dnerf">K-StyleLoRA</span>, a
+            novel framework that leverages CLIP's cross-modal capabilities
+            for cultural image generation. Our approach introduces
+            two key contributions. First, CLIP-Guided Information
+            Gating dynamically modulates LoRA adaptations
+            based on cultural relevance scores, selectively enhancing
+            relevant features while suppressing irrelevant ones. Second,
+            Cultural Semantic Loss provides additional semantic
+            guidance by optimizing CLIP-based similarity to cultural
+            concepts.
+          </p>
+          <p>
+            Extensive experiments on Korean traditional
+            culture show superior cultural fidelity while maintaining
+            generation quality and diversity. Our framework establishes
+            semantic-aware adaptation as a powerful paradigm
+            for cultural representation. This scalable approach can be
+            extended to diverse cultural contexts and generation tasks
+            beyond Korean aesthetics.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Visual Effects. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content has-text-centered">
+          <h2 class="title is-3">Visual Effects</h2>
+          <p>
+            K-StyleLoRA enables high-quality image generation with selective feature learning.
+          </p>
+        </div>
+        <div class="hero-body">
+          <div class="container">
+            <div id="visual-effects-carousel" class="carousel results-carousel">
+              <div class="item">
+                <img src="./static/images/K-Style/10.png" alt="K-StyleLoRA Visual Effects" style="width: 100%; height: auto;">
+              </div>
+              <div class="item">
+                <img src="./static/images/K-Style/10.png" alt="K-StyleLoRA Visual Effects" style="width: 100%; height: auto;">
+              </div>
+              <div class="item">
+                <img src="./static/images/K-Style/10.png" alt="K-StyleLoRA Visual Effects" style="width: 100%; height: auto;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Visual Effects. -->
+
+    <!-- Results. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content has-text-centered">
+          <h2 class="title is-3">Results</h2>
+          <p>
+            Our method demonstrates superior performance in information-guided image generation.
+          </p>
+        </div>
+        <div class="hero-body">
+          <div class="container">
+            <div id="results-carousel-2" class="carousel results-carousel">
+              <div class="item">
+                <img src="./static/images/K-Style/11.png" alt="K-StyleLoRA Results" style="width: 100%; height: auto;">
+              </div>
+              <div class="item">
+                <img src="./static/images/K-Style/11.png" alt="K-StyleLoRA Results" style="width: 100%; height: auto;">
+              </div>
+              <div class="item">
+                <img src="./static/images/K-Style/11.png" alt="K-StyleLoRA Results" style="width: 100%; height: auto;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Results. -->
+
+    <!-- Comparison. -->
+    <section class="hero is-light is-small">
+      <div class="hero-body">
+        <div class="container">
+          <div class="content has-text-centered">
+            <h2 class="title is-3">Comparison: Vanilla SDXL vs K-StyleLoRA</h2>
+            <p>
+              Side-by-side comparison demonstrating the superior cultural representation of K-StyleLoRA.
+            </p>
+          </div>
+          <div id="comparison-carousel" class="carousel results-carousel">
+            <div class="item">
+              <div class="columns" style="margin: 0;">
+                <div class="column" style="padding: 5px;">
+                  <h4 class="title is-5 has-text-centered">Vanilla SDXL</h4>
+                  <img src="./static/images/vanilla/01.png" alt="Vanilla SDXL 1" style="width: 100%; height: auto;">
+                </div>
+                <div class="column" style="padding: 5px;">
+                  <h4 class="title is-5 has-text-centered">K-StyleLoRA</h4>
+                  <img src="./static/images/k-stylelora/01.png" alt="K-StyleLoRA 1" style="width: 100%; height: auto;">
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="columns" style="margin: 0;">
+                <div class="column" style="padding: 5px;">
+                  <h4 class="title is-5 has-text-centered">Vanilla SDXL</h4>
+                  <img src="./static/images/vanilla/02.png" alt="Vanilla SDXL 2" style="width: 100%; height: auto;">
+                </div>
+                <div class="column" style="padding: 5px;">
+                  <h4 class="title is-5 has-text-centered">K-StyleLoRA</h4>
+                  <img src="./static/images/k-stylelora/02.png" alt="K-StyleLoRA 2" style="width: 100%; height: auto;">
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="columns" style="margin: 0;">
+                <div class="column" style="padding: 5px;">
+                  <h4 class="title is-5 has-text-centered">Vanilla SDXL</h4>
+                  <img src="./static/images/vanilla/03.png" alt="Vanilla SDXL 3" style="width: 100%; height: auto;">
+                </div>
+                <div class="column" style="padding: 5px;">
+                  <h4 class="title is-5 has-text-centered">K-StyleLoRA</h4>
+                  <img src="./static/images/k-stylelora/03.png" alt="K-StyleLoRA 3" style="width: 100%; height: auto;">
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="columns" style="margin: 0;">
+                <div class="column" style="padding: 5px;">
+                  <h4 class="title is-5 has-text-centered">Vanilla SDXL</h4>
+                  <img src="./static/images/vanilla/04.png" alt="Vanilla SDXL 4" style="width: 100%; height: auto;">
+                </div>
+                <div class="column" style="padding: 5px;">
+                  <h4 class="title is-5 has-text-centered">K-StyleLoRA</h4>
+                  <img src="./static/images/k-stylelora/04.png" alt="K-StyleLoRA 4" style="width: 100%; height: auto;">
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="columns" style="margin: 0;">
+                <div class="column" style="padding: 5px;">
+                  <h4 class="title is-5 has-text-centered">Vanilla SDXL</h4>
+                  <img src="./static/images/vanilla/05.png" alt="Vanilla SDXL 5" style="width: 100%; height: auto;">
+                </div>
+                <div class="column" style="padding: 5px;">
+                  <h4 class="title is-5 has-text-centered">K-StyleLoRA</h4>
+                  <img src="./static/images/k-stylelora/05.png" alt="K-StyleLoRA 5" style="width: 100%; height: auto;">
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="columns" style="margin: 0;">
+                <div class="column" style="padding: 5px;">
+                  <h4 class="title is-5 has-text-centered">Vanilla SDXL</h4>
+                  <img src="./static/images/vanilla/06.png" alt="Vanilla SDXL 6" style="width: 100%; height: auto;">
+                </div>
+                <div class="column" style="padding: 5px;">
+                  <h4 class="title is-5 has-text-centered">K-StyleLoRA</h4>
+                  <img src="./static/images/k-stylelora/06.png" alt="K-StyleLoRA 6" style="width: 100%; height: auto;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ Comparison. -->
+
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Animation</h2>
+
+        <!-- Interpolating. -->
+        <h3 class="title is-4">Interpolating states</h3>
+        <div class="content has-text-justified">
+          <p>
+            We can also animate the scene by interpolating the deformation latent codes of two input
+            frames. Use the slider here to linearly interpolate between the left frame and the right
+            frame.
+          </p>
+        </div>
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/interpolate_start.jpg"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+            <p>Start Frame</p>
+          </div>
+          <div class="column interpolation-video-column">
+            <div id="interpolation-image-wrapper">
+              Loading...
+            </div>
+            <input class="slider is-fullwidth is-large is-info"
+                   id="interpolation-slider"
+                   step="1" min="0" max="100" value="0" type="range">
+          </div>
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/interpolate_end.jpg"
+                 class="interpolation-image"
+                 alt="Interpolation end reference image."/>
+            <p class="is-bold">End Frame</p>
+          </div>
+        </div>
+        <br/>
+        <!--/ Interpolating. -->
+
+
+      </div>
+    </div>
+    <!--/ Animation. -->
+
+
+    <!-- Concurrent Work. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Links</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            There's a lot of excellent work that was introduced around the same time as ours.
+          </p>
+          <p>
+            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
+          </p>
+          <p>
+            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
+            both use deformation fields to model non-rigid scenes.
+          </p>
+          <p>
+            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
+          </p>
+          <p>
+            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Concurrent Work. -->
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{lee2025kstylelora,
+  author={Lee, Soyoung and Cho, Hyoungseo and Kang, Myungjoo and Yoo, YoungJoon},
+  title     = {K-StyleLoRA: Information-Guided Image Generation via Selective Feature Learning},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) Workshops},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
